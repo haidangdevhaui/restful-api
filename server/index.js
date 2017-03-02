@@ -58,7 +58,9 @@ app.use('/api/upload', uploadRouter);
 app.use('/api/init', routerIndex);
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, './', 'index.html'));
+    res.json({
+        message: 'Application is working!'
+    });
 })
 
 
