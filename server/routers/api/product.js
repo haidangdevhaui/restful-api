@@ -23,7 +23,7 @@ router.post('/create', (req, res) => {
 });
 
 router.get('/show/:_id', (req, res) => {
-    Product.findById(req.query._id).exec((err, product) => {
+    Product.findById(req.params._id).exec((err, product) => {
         return res.json({
             error: err ? false : err,
             result: product
@@ -32,7 +32,7 @@ router.get('/show/:_id', (req, res) => {
 })
 
 router.get('/edit/:_id', (req, res) => {
-    Product.findById(req.query._id).exec((err, product) => {
+    Product.findById(req.params._id).exec((err, product) => {
         return res.json({
             error: err ? false : err,
             result: product
@@ -41,7 +41,7 @@ router.get('/edit/:_id', (req, res) => {
 })
 
 router.put('/update', (req, res) => {
-    Product.findById(req.query._id).exec((err, product) => {
+    Product.findById(req.params._id).exec((err, product) => {
         [...product, req.body];
         product.save((err, newProduct) => {
             return res.json({
@@ -53,7 +53,7 @@ router.put('/update', (req, res) => {
 });
 
 router.delete('/destroy/:_id', (req, res) => {
-    Product.delete({_id: req.query._id}).exec();
+    Product.delete({_id: req.params._id}).exec();
     return res.json({
         error: false
     });
