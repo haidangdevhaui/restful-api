@@ -52,7 +52,10 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use('/static', express.static('public'))
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return next();
+})
 app.use('/api/user', routerUser);
 app.use('/api/auth', auth);
 app.use('/api/upload', uploadRouter);
