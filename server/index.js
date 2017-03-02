@@ -20,6 +20,7 @@ import auth from './routers/auth';
 import routerUser from './routers/api/user';
 import routerIndex from './routers/api/index';
 import uploadRouter from './routers/api/upload';
+import productRouter from './routers/api/product';
 
 let app = express();
 
@@ -55,7 +56,7 @@ app.use('/static', express.static('public'))
 app.use('/api/user', routerUser);
 app.use('/api/auth', auth);
 app.use('/api/upload', uploadRouter);
-app.use('/api/init', routerIndex);
+app.use('/api/product', productRouter);
 
 app.get('/*', (req, res) => {
     res.json({
