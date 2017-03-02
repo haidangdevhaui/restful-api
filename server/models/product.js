@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import hash from 'password-hash';
 
 let productSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     name: String,
     price: Number,
     image: String,
