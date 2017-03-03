@@ -40,14 +40,10 @@ router.get('/edit/:_id', (req, res) => {
 })
 
 router.put('/update/:_id', (req, res) => {
-    Product.findById(req.params._id).exec((err, product) => {
-        [...product, req.body];
-        console.log(product);
-        product.save((err, newProduct) => {
-            return res.json({
-                error: err ? err : false,
-                result: newProduct
-            });
+    Product.update({ _id: req.params._id }, { $set: req.body}, (err, result) => {
+        return res.json({
+            error: err ? err : false,
+            result: result
         });
     });
 });
