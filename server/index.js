@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 import session from 'express-session';
 import passport from 'passport';
+import cors from 'cors';
 
 import configServer from './config/server';
 import configDB from './config/database';
@@ -52,10 +53,7 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use('/static', express.static('public'))
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    return next();
-})
+app.use(cors());
 app.use('/api/user', routerUser);
 app.use('/api/auth', auth);
 app.use('/api/upload', uploadRouter);
