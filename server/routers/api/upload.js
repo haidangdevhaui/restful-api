@@ -24,20 +24,17 @@ const router = express.Router();
 
 router.post('/', parser.array('images'), (req, res) => {
     let response = [];
-    let images = [];
     for(var i= 0; i < req.files.length; i++){
         let _image = new Image();
-        _image.uid = req.user._id;
         _image.src = req.files[i].url;
         _image.cid = req.files[i].public_id;
         _image.type = req.files[i].resource_type;
         _image.save();
         response.push(_image);
-        images.push(_image._id);
     }
     res.json({
-        images: images,
-        response: response
+        error: false,
+        result: response
     });
 });
 
