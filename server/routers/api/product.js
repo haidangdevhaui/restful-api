@@ -39,7 +39,7 @@ router.get('/edit/:_id', (req, res) => {
     });
 })
 
-router.put('/update', (req, res) => {
+router.put('/update/:_id', (req, res) => {
     Product.findById(req.params._id).exec((err, product) => {
         [...product, req.body];
         product.save((err, newProduct) => {
