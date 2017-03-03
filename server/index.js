@@ -25,10 +25,8 @@ import productRouter from './routers/api/product';
 
 let app = express();
 
-let mongoOption = {
-    promiseLibrary: require('bluebird')
-}
-mongoose.connect(configDB.mongo.uri, mongoOption);
+mongoose.Promise = require('bluebird');
+mongoose.connect(configDB.mongo.uri);
 
 app.use(bodyParser.urlencoded({
 	extended: true
