@@ -24,7 +24,7 @@ router.post('/create', (req, res) => {
     })
     */
     Product.create(req.body, (err, product) => {
-        console.log(product);
+        console.log(err);
         return res.json(product)
         return res.json({
             error: err ? false : err,
