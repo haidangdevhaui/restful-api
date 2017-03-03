@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 
 router.post('/create', (req, res) => {
     let product = new Product(req.body);
+    console.log(product);
     product.save((err, _product) => {
         return res.json({
             error: err ? false : err,
