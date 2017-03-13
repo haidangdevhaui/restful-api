@@ -6,6 +6,7 @@ import methodOverride from 'method-override';
 import session from 'express-session';
 import passport from 'passport';
 import cors from 'cors';
+import herokuProxy from 'heroku-proxy';
 
 import configServer from './config/server';
 import configDB from './config/database';
@@ -51,6 +52,13 @@ app.use(webpackMiddleware(compiler, {
     noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
+
+app.use(herokuProxy({
+  hostname: 'api-haidangdev.herokuapp.com',
+  port    : configServer.port,
+  prefix  : '/',
+  protocol: 'http'
+}));
 
 app.use('/static', express.static('public'))
 app.use(cors());
