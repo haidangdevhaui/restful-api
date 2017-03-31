@@ -6,9 +6,6 @@ import methodOverride from 'method-override';
 import session from 'express-session';
 import passport from 'passport';
 import cors from 'cors';
-/*
-import herokuProxy from 'heroku-proxy';
-*/
 import configServer from './config/server';
 import configDB from './config/database';
 
@@ -24,6 +21,7 @@ import routerUser from './routers/api/user';
 import routerIndex from './routers/api/index';
 import uploadRouter from './routers/api/upload';
 import productRouter from './routers/api/product';
+import blogRouter from './routers/api/blog';
 
 let app = express();
 
@@ -54,21 +52,14 @@ app.use(webpackMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-/*
-app.use(herokuProxy({
-  hostname: 'api-haidangdev.herokuapp.com',
-  port    : configServer.port,
-  prefix  : '/',
-  protocol: 'http'
-}));
-*/
-
 app.use('/static', express.static('public'))
 app.use(cors());
+app.set('view engine', 'ejs');
 app.use('/api/user', routerUser);
 app.use('/api/auth', auth);
 app.use('/api/upload', uploadRouter);
 app.use('/api/product', productRouter);
+app.use('/api/blog', blogRouter);
 
 app.get('/*', (req, res) => {
     res.json({
