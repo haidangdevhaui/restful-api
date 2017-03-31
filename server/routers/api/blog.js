@@ -6,7 +6,11 @@ import Author from '../../models/blog/author';
 const router = express.Router();
 
 router.get('/category', (req, res) => {
-    Category.find().exec((err, doc) => {
+    Category.find({}, 
+        {
+            _id: 0
+        }
+    ).exec((err, doc) => {
         return res.json(doc);
     })
 });
@@ -57,6 +61,7 @@ export function getListPosts(cond){
         },
         {
             $project: {
+                '_id': 0,
                 'title': 1,
                 'slug': 1,
                 'image': 1,
